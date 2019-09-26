@@ -5,12 +5,17 @@ import java.nio.file.Paths
 import java.nio.file.Files
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import kotlin.system.exitProcess
+
+private val interpreter = Interpreter()
 
 var hadError = false
+var hadRuntimeError = false
+
 fun main(args: Array<String>) {
 	if (args.size > 1) {
 		println("Usage: klox [script]")
-		System.exit(64)
+		exitProcess(64)
 	} else if (args.size == 1) {
 		runFile(args[0])
 	} else {
@@ -21,7 +26,8 @@ fun main(args: Array<String>) {
 private fun runFile(path: String) {
 	val bytes = Files.readAllBytes(Paths.get(path))
 	run(String(bytes, Charset.defaultCharset()))
-	if (hadError) System.exit(65)
+	if (hadError) exitProcess(65)
+	if (hadRuntimeError) exitProcess(70)
 }
 
 private fun runPrompt() {
@@ -40,12 +46,12 @@ private fun run(source: String) {
 	val tokens = scanner.scanTokens()
 
 	val parser = Parser(tokens)
-	val expression = parser.parse()
+	val expression = parser.parse() ?: return
 
 	// Stop if there was a syntax error.
 	if (hadError) return
 
-	println(AstPrinter().print(expression!!))
+	interpreter.interpret(expression)
 }
 
 fun error(line: Int, message: String) {
@@ -63,4 +69,9 @@ fun error(token: Token, message: String) {
 	} else {
 		report(token.line, " at '" + token.lexeme + "'", message)
 	}
+}
+
+fun runtimeError(error:RuntimeError) {
+	System.err.println("${error.message}\n[line " + error.token.line + "]")
+	hadRuntimeError = true
 }
