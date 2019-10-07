@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1d39c99-b363-4624-b61b-94b39591655e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Interpreter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/RuntimeError.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Environment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Stmt.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/AstPrinter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/AstPrinter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Binary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Binary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Grouping.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Grouping.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Literal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Literal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Unary.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Unary.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Visitor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr$Visitor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Expr.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/LoxKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/LoxKt.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Parser$ParseError.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Parser$ParseError.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/klox/Parser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/kklox/net/jemzart/tool/GenerateAstKt.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/kklox/net/jemzart/tool/GenerateAstKt.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Expr.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Expr.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Interpreter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Interpreter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Lox.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Lox.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Parser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox/Parser.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/tool/GenerateAst.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/net/jemzart/tool/GenerateAst.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +54,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554266776973" />
+    <property name="ignore_missing_gitignore" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/kotlin/net/jemzart/klox" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -63,6 +75,7 @@
       <recent name="main.kotlin.net.jemzart.klox" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Proyects\Kotlin\klox\src\main\kotlin\net\jemzart\klox" />
       <recent name="C:\Proyectos\kklox\src\main\kotlin\net\jemzart\klox" />
     </key>
   </component>
@@ -119,7 +132,7 @@
     <configuration name="ASTOOL" type="JetRunConfigurationType" factoryName="Kotlin">
       <module name="kklox" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="C:\lox" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
@@ -204,6 +217,10 @@
       <workItem from="1569369383245" duration="1185000" />
       <workItem from="1569371800282" duration="4946000" />
       <workItem from="1569452663169" duration="3766000" />
+      <workItem from="1570287964018" duration="1786000" />
+      <workItem from="1570291200658" duration="6461000" />
+      <workItem from="1570331048447" duration="937000" />
+      <workItem from="1570387459804" duration="4781000" />
     </task>
     <servers />
   </component>

@@ -1,11 +1,47 @@
 package net.jemzart.klox
 
+import kotlin.reflect.KFunction
+import jdk.nashorn.internal.objects.NativeJSON.stringify
+import kotlin.reflect.jvm.internal.impl.descriptors.ModuleDescriptor.DefaultImpls.accept
+import com.sun.org.apache.xpath.internal.operations.Variable
 
-class Interpreter : Expr.Visitor<Any?> {
-    fun interpret(expression: Expr) {
+
+
+
+
+
+
+
+class Interpreter : Expr.Visitor<Any?>, Stmt.Visitor<Unit> {
+    private val environment = Environment()
+
+    override fun visitExpressionStmt(stmt: Stmt.Expression) {
+        evaluate(stmt.expression);
+    }
+
+    override fun visitPrintStmt(stmt: Stmt.Print) {
+        val value = evaluate(stmt.expression)
+        println(stringify(value))
+    }
+
+    override fun visitVarStmt(stmt: Stmt.Var) {
+        var value: Any? = null
+        if (stmt.initializer != null) {
+            value = evaluate(stmt.initializer)
+        }
+
+        environment.define(stmt.name.lexeme, value)
+    }
+
+    override fun visitVariableExpr(expr: Expr.Variable): Any? {
+        return environment[expr.name]
+    }
+
+    fun interpret(statements: List<Stmt>) {
         try {
-            val value = evaluate(expression)
-            println(stringify(value))
+            for (statement in statements) {
+                execute(statement)
+            }
         } catch (error: RuntimeError) {
             runtimeError(error)
         }
@@ -60,8 +96,13 @@ class Interpreter : Expr.Visitor<Any?> {
     }
 
     private fun evaluate(expr: Expr) = expr.accept(this)
+
     override fun visitGroupingExpr(expr: Expr.Grouping): Any? {
         return evaluate(expr.expression)
+    }
+
+    private fun execute(stmt: Stmt) {
+        stmt.accept(this)
     }
 
     override fun visitLiteralExpr(expr: Expr.Literal): Any? {

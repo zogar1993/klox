@@ -1,23 +1,67 @@
 package net.jemzart.klox
 
 import net.jemzart.klox.TokenType.*
+import java.time.temporal.TemporalAdjusters.previous
+import com.sun.org.apache.xpath.internal.operations.Variable
 
 
 
 internal class Parser(private val tokens: List<Token>) {
     private var current = 0
 
-    fun parse(): Expr? {
-        try {
-            return expression()
-        } catch (error: ParseError) {
-            return null
+    fun parse(): List<Stmt> {
+        val statements = mutableListOf<Stmt>()
+        while (!isAtEnd()) {
+            statements.add(declaration())
         }
+
+        return statements
     }
 
     private fun expression(): Expr {
         return equality()
     }
+
+    private fun declaration(): Stmt? {
+        try {
+            return if (match(VAR)) varDeclaration() else statement()
+
+        } catch (error: ParseError) {
+            synchronize()
+            return null
+        }
+
+    }
+
+    private fun statement(): Stmt {
+        return if (match(PRINT)) printStatement() else expressionStatement()
+
+    }
+
+    private fun printStatement(): Stmt {
+        val value = expression()
+        consume(SEMICOLON, "Expect ';' after value.")
+        return Stmt.Print(value)
+    }
+
+    private fun varDeclaration(): Stmt {
+        val name = consume(IDENTIFIER, "Expect variable name.")
+
+        var initializer: Expr? = null
+        if (match(EQUAL)) {
+            initializer = expression()
+        }
+
+        consume(SEMICOLON, "Expect ';' after variable declaration.")
+        return Stmt.Var(name, initializer)
+    }
+
+    private fun expressionStatement(): Stmt {
+        val expr = expression()
+        consume(SEMICOLON, "Expect ';' after expression.")
+        return Stmt.Expression(expr)
+    }
+
     private fun equality(): Expr {
         var expr = comparison()
 
@@ -84,7 +128,9 @@ internal class Parser(private val tokens: List<Token>) {
         if (match(NUMBER, STRING)) {
             return Expr.Literal(previous().literal)
         }
-
+        if (match(IDENTIFIER)) {
+            return Expr.Variable(previous())
+        }
         if (match(LEFT_PAREN)) {
             val expr = expression()
             consume(RIGHT_PAREN, "Expect ')' after expression.")
